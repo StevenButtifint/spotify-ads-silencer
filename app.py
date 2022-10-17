@@ -32,6 +32,11 @@ class SpotifyAdsSilencer:
         self.window.update_idletasks()
         self.run()
 
+    def update_ad_count(self):
+        self.adCount += 1
+        self.canvas.itemconfigure(self.adCountText, text="Ads Silenced: " + str(self.adCount))
+        self.adStart = datetime.datetime.now()
+
 
 
 if __name__ == "__main__":
