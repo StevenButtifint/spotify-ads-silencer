@@ -37,6 +37,10 @@ class SpotifyAdsSilencer:
         self.canvas.itemconfigure(self.adCountText, text="Ads Silenced: " + str(self.adCount))
         self.adStart = datetime.datetime.now()
 
+    def run(self):
+        active_user_windows = ctypes.windll.user32.EnumWindows
+        active_user_processes = ctypes.WINFUNCTYPE(ctypes.c_bool, ctypes.POINTER(ctypes.c_int),
+                                                   ctypes.POINTER(ctypes.c_int))
 
 
 if __name__ == "__main__":
