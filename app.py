@@ -44,6 +44,18 @@ class SpotifyAdsSilencer:
         window_text = ctypes.windll.user32.GetWindowTextW
         window_text_length = ctypes.windll.user32.GetWindowTextLengthW
         window_visible = ctypes.windll.user32.IsWindowVisible
+        titles = []
+
+        def for_each_window(hwnd, _):
+            if window_visible(hwnd):
+                length = window_text_length(hwnd)
+                buff = ctypes.create_unicode_buffer(length + 1)
+                window_text(hwnd, buff, length + 1)
+                titles.append(buff.value)
+            return True
+
+        active_user_windows(active_user_processes(for_each_window), 0)
+
 
 
 if __name__ == "__main__":
