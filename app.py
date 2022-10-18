@@ -56,6 +56,7 @@ class SpotifyAdsSilencer:
 
         active_user_windows(active_user_processes(for_each_window), 0)
 
+        sessions = AudioUtilities.GetAllSessions()
 
 
 if __name__ == "__main__":
