@@ -67,6 +67,10 @@ class SpotifyAdsSilencer:
                         self.canvas.itemconfigure(self.soundStateText, text="Spotify is currently: Silenced")
                         self.newAd = False
 
+            else:
+                if (datetime.datetime.now() - self.adStart).total_seconds() > 30:
+                    self.update_ad_count()
+
         self.window.after(1000, self.run)
 
 
