@@ -57,6 +57,17 @@ class SpotifyAdsSilencer:
         active_user_windows(active_user_processes(for_each_window), 0)
 
         sessions = AudioUtilities.GetAllSessions()
+        if ("Advertisement" in titles) or ("Spotify" in titles):
+            if self.newAd:
+                for session in sessions:
+                    if str(session) == "Process: Spotify.exe":
+                        volume = session.SimpleAudioVolume
+                        volume.SetMute(1, None)
+                        self.update_ad_count()
+                        self.canvas.itemconfigure(self.soundStateText, text="Spotify is currently: Silenced")
+                        self.newAd = False
+
+        self.window.after(1000, self.run)
 
 
 if __name__ == "__main__":
