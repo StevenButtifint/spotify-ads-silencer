@@ -71,6 +71,16 @@ class SpotifyAdsSilencer:
                 if (datetime.datetime.now() - self.adStart).total_seconds() > 30:
                     self.update_ad_count()
 
+        else:
+            if not self.newAd:
+                for session in sessions:
+                    if str(session) == "Process: Spotify.exe":
+                        time.sleep(1)
+                        volume = session.SimpleAudioVolume
+                        volume.SetMute(0, None)
+                        self.canvas.itemconfigure(self.soundStateText, text="Spotify is currently: Audible")
+                        self.newAd = True
+
         self.window.after(1000, self.run)
 
 
